@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const body = await request.formData()
     const { refresh_token: refreshToken, provider } = formDataToJson(body)
 
-    const redirect_uri = `${request.nextUrl.origin}/callback`
+    const redirect_uri = `${process.env.NEXT_PUBLIC_CLIENT_URL}/callback`
 
     const { data: token } = await axios.post<Token>("https://oauth2.googleapis.com/token", {
         client_id: process.env.NEXT_PUBLIC_CLIENT_ID as string,
